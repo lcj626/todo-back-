@@ -2,6 +2,9 @@ package com.ohgiraffers.todolist.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Entity
 @Table(name = "tbl_todo")
 public class TodoEntity {
@@ -14,16 +17,21 @@ public class TodoEntity {
     @Column(name = "todo_contents")
     private String contents;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "regist_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime registDate;
+
+    @Column(name = "todo_complete")
+    private Boolean isCompleted;
 
     public TodoEntity() {
     }
 
-    public TodoEntity(Long id, String contents, String status) {
+    public TodoEntity(Long id, String contents, LocalDateTime registDate, Boolean isCompleted) {
         this.id = id;
         this.contents = contents;
-        this.status = status;
+        this.registDate = registDate;
+        this.isCompleted = isCompleted;
     }
 
     public Long getId() {
@@ -42,12 +50,20 @@ public class TodoEntity {
         this.contents = contents;
     }
 
-    public String getStatus() {
-        return status;
+    public LocalDateTime getRegistDate() {
+        return registDate;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setRegistDate(LocalDateTime registDate) {
+        this.registDate = registDate;
+    }
+
+    public Boolean getCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(Boolean completed) {
+        isCompleted = completed;
     }
 
     @Override
@@ -55,7 +71,8 @@ public class TodoEntity {
         return "TodoEntity{" +
                 "id=" + id +
                 ", contents='" + contents + '\'' +
-                ", status='" + status + '\'' +
+                ", registDate=" + registDate +
+                ", isCompleted=" + isCompleted +
                 '}';
     }
 }

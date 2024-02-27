@@ -13,7 +13,7 @@ public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
 
-    public List<TodoEntity> getAll(){
+    public List<TodoEntity> getTodos(){
         return todoRepository.findAll();
     }
 
