@@ -5,6 +5,7 @@ import com.ohgiraffers.todolist.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -16,6 +17,12 @@ public class TodoService {
     public List<TodoEntity> getTodos(){
         return todoRepository.findAll();
     }
+
+//    public List<TodoEntity> getTodosByDate(LocalDateTime selectedDate){
+//
+//        return todoRepository.findByRegistDate(selectedDate);
+//    }
+
 
     public TodoEntity updateTodo(TodoEntity todoEntity){
         return todoRepository.save(todoEntity);
