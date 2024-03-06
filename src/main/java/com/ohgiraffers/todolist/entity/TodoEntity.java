@@ -2,8 +2,10 @@ package com.ohgiraffers.todolist.entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 @Entity
 @Table(name = "tbl_todo")
@@ -18,16 +20,16 @@ public class TodoEntity {
     private String contents;
 
     @Column(name = "regist_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime registDate;
+    private Date registDate;
 
     @Column(name = "todo_complete")
-    private Boolean isCompleted;
+    private boolean isCompleted;
+
 
     public TodoEntity() {
     }
 
-    public TodoEntity(Long id, String contents, LocalDateTime registDate, Boolean isCompleted) {
+    public TodoEntity(Long id, String contents, Date registDate, boolean isCompleted) {
         this.id = id;
         this.contents = contents;
         this.registDate = registDate;
@@ -50,19 +52,19 @@ public class TodoEntity {
         this.contents = contents;
     }
 
-    public LocalDateTime getRegistDate() {
+    public Date getRegistDate() {
         return registDate;
     }
 
-    public void setRegistDate(LocalDateTime registDate) {
+    public void setRegistDate(Date registDate) {
         this.registDate = registDate;
     }
 
-    public Boolean getCompleted() {
+    public boolean isCompleted() {
         return isCompleted;
     }
 
-    public void setCompleted(Boolean completed) {
+    public void setCompleted(boolean completed) {
         isCompleted = completed;
     }
 
