@@ -18,7 +18,5 @@ public interface TodoRepository extends JpaRepository<TodoEntity,Long> {
     @Query("SELECT t FROM TodoEntity t WHERE t.registDate = :date")
     List<TodoEntity> findByRegistDate(@Param("date") Date date);
 
-//    List<TodoEntity> findByRegistDateBetween(LocalDateTime startDateTime, LocalDateTime endDateTime);
 
-//    List<TodoEntity> findByDate(Date date);
 }

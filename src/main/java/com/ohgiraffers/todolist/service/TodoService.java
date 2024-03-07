@@ -2,6 +2,7 @@ package com.ohgiraffers.todolist.service;
 
 import com.ohgiraffers.todolist.entity.TodoEntity;
 import com.ohgiraffers.todolist.repository.TodoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
@@ -21,37 +22,24 @@ public class TodoService {
         this.todoRepository = todoRepository;
     }
 
-//    public List<TodoEntity> getTodos(){
-//        return todoRepository.findAll();
-//    }
-
-//    public List<TodoEntity> getTodosByDate(String dateParam){
-//        LocalDate date = LocalDate.parse(dateParam);
-//
-//        return todoRepository.findByDate(date);
-//    }
-
 
     public List<TodoEntity> findTodosByDate(Date date) {
         return todoRepository.findByRegistDate(date);
     }
 
 
-//    public List<TodoEntity> getTodosByDate(String date) {
-//        LocalDateTime dateTime = LocalDateTime.parse(date);
-//        return todoRepository.findByRegistDate(dateTime);
-//    }
-//
-//    public TodoEntity updateTodo(TodoEntity todoEntity){
-//        return todoRepository.save(todoEntity);
-//    }
-
-
-//    public List<TodoEntity> getTodosByDate(LocalDate date) {
-//        return todoRepository.findByRegistDate(date);
-//    }
-
     public TodoEntity addTodo(TodoEntity todo) {
         return todoRepository.save(todo);
+    }
+
+    public TodoEntity updateTodo(TodoEntity todo) throws EntityNotFoundException {
+        if(!todoRepository.existsById(todo.getId())){
+            throw new EntityNotFoundException("Todo with Id " + todo.getId() + " not found");
+        }
+        return todoRepository.save(todo);
+    }
+
+    public void deleteTodo(Long id){
+        todoRepository.deleteById(id);
     }
 }
